@@ -5,6 +5,7 @@ export interface Event {
   location: string;
   date: string;
   image: string;
+  imageAlt: string;
   isFeatured: boolean;
 }
 
@@ -17,6 +18,7 @@ const DUMMY_EVENTS: Event[] = [
     location: "Somestreet 25, 12345 San Somewhereo",
     date: "2021-05-12",
     image: "images/coding-event.jpg",
+    imageAlt: "Coding event",
     isFeatured: false,
   },
   {
@@ -27,6 +29,7 @@ const DUMMY_EVENTS: Event[] = [
     location: "New Wall Street 5, 98765 New Work",
     date: "2021-05-30",
     image: "images/introvert-event.jpg",
+    imageAlt: "Introvert event",
     isFeatured: true,
   },
   {
@@ -37,6 +40,7 @@ const DUMMY_EVENTS: Event[] = [
     location: "My Street 12, 10115 Broke City",
     date: "2022-04-10",
     image: "images/extrovert-event.jpg",
+    imageAlt: "Extrovert event",
     isFeatured: true,
   },
 ];

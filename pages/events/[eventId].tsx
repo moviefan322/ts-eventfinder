@@ -1,10 +1,38 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { useRouter, NextRouter } from "next/router";
+import { getEventById } from "@/dummy-data";
+import { Event } from "@/dummy-data";
+import EventSummary from "@/components/event-detail/event-summary";
+import EventLogistics from "@/components/event-detail/event-logistics";
+import EventContent from "@/components/event-detail/event-content";
 
 function EventDetail() {
+  const router: NextRouter = useRouter();
+  const eventId: string = router.query.eventId as string;
+
+  const event: Event | undefined = getEventById(eventId);
+
+  if (!event) {
+    return (
+      <div>
+        <h1>No Event Found</h1>
+      </div>
+    );
+  }
+
   return (
-    <div>
-      <h1>Event Detail Page</h1>
-    </div>
+    <Fragment>
+      <EventSummary title={event.title} />
+      <EventLogistics
+        date={event.date}
+        address={event.location}
+        image={event.image}
+        imageAlt={event.imageAlt}
+      />
+      <EventContent>
+        <p>{event.description}</p>
+      </EventContent>
+    </Fragment>
   );
 }
 
