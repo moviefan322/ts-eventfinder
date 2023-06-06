@@ -1,6 +1,6 @@
 import React from "react";
 import { getFeaturedEvents, Event } from "@/dummy-data";
-import EventList from "@/components/EventList";
+import EventList from "../components/events/EventList";
 
 function HomePage(): JSX.Element {
   const featuredEvents: Event[] = getFeaturedEvents();
