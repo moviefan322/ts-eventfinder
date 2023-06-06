@@ -5,6 +5,7 @@ import { Event } from "@/dummy-data";
 import EventSummary from "@/components/event-detail/event-summary";
 import EventLogistics from "@/components/event-detail/event-logistics";
 import EventContent from "@/components/event-detail/event-content";
+import ErrorAlert from "@/components/ui/error-alert";
 
 function EventDetail() {
   const router: NextRouter = useRouter();
@@ -15,7 +16,9 @@ function EventDetail() {
   if (!event) {
     return (
       <div>
-        <h1>No Event Found</h1>
+        <ErrorAlert>
+          <h1>No Event Found</h1>
+        </ErrorAlert>
       </div>
     );
   }
