@@ -7,8 +7,7 @@ function EventsPage(): JSX.Element {
 
   return (
     <div>
-      <h1>Featured Events:</h1>
-      <EventList events={featuredEvents} />
+      <h1>All Events:</h1>
     </div>
   );
 }
