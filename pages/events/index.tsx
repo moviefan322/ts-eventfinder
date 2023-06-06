@@ -1,6 +1,6 @@
 import React from "react";
 import { getFeaturedEvents, Event } from "@/dummy-data";
-import EventItem from "@/components/EventItem";
+import EventList from "@/components/EventList";
 
 function EventsPage(): JSX.Element {
   const featuredEvents: Event[] = getFeaturedEvents();
@@ -8,9 +8,7 @@ function EventsPage(): JSX.Element {
   return (
     <div>
       <h1>Featured Events:</h1>
-      {featuredEvents.map((event) => (
-        <EventItem key={event.id} event={event} />
-      ))}
+      <EventList events={featuredEvents} />
     </div>
   );
 }

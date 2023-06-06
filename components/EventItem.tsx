@@ -8,13 +8,18 @@ type EventItemProps = {
 
 function EventItem({ event }: EventItemProps): JSX.Element {
   return (
-    <div>
+    <li>
       <h1>{event.title}</h1>
-      <Image src={"/" + event.image} alt={event.title} width={400} height={300}/>
+      <Image
+        src={"/" + event.image}
+        alt={event.title}
+        width={400}
+        height={300}
+      />
       <p>{event.description}</p>
       <p>{event.location}</p>
       <p>{event.date}</p>
-    </div>
+    </li>
   );
 }
 
