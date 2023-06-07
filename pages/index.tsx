@@ -28,8 +28,12 @@ function HomePage(props: Props): JSX.Element {
       <Head>
         <title>NextJS Events</title>
         <meta
-        name="description"
-        content="Find a lot of great events that allow you to evolve..."
+          name="description"
+          content="Find a lot of great events that allow you to evolve..."
+        />
+        <meta
+          name="description"
+          content="Find a lot of great events that allow you to evolve..."
         />
       </Head>
       <div>
