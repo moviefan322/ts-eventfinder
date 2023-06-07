@@ -1,16 +1,24 @@
 import React from "react";
-import {useRouter, NextRouter} from "next/router";
-import { getFeaturedEvents, Event } from "@/dummy-data";
+import { useRouter, NextRouter } from "next/router";
+import { getFeaturedEvents, Event } from "@/helpers/api-util";
 import EventList from "../components/events/EventList";
 import EventSearch from "@/components/events/EventSearch";
 
-function HomePage(): JSX.Element {
-  const featuredEvents: Event[] = getFeaturedEvents();
+type Props = {
+  featuredEvents: Event[];
+};
+
+function HomePage(props: Props): JSX.Element {
+  const { featuredEvents } = props;
   const router: NextRouter = useRouter();
 
   function findEventsHandler(year: string, month: string) {
     const fullPath: string = `/events/${year}/${month}`;
     router.push(fullPath);
+  }
+
+  if (!featuredEvents) {
+    return <p>Loading...</p>;
   }
 
   return (
@@ -19,6 +27,17 @@ function HomePage(): JSX.Element {
       <EventList events={featuredEvents} />
     </div>
   );
+}
+
+export async function getStaticProps(): Promise<{ props: Props }> {
+  const featuredEvents: Event[] = await getFeaturedEvents();
+  console.log(featuredEvents);
+
+  return {
+    props: {
+      featuredEvents,
+    },
+  };
 }
 
 export default HomePage;
