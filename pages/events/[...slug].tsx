@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter, NextRouter } from "next/router";
 import useSWR from "swr";
+import Head from "next/head";
 import { getFilteredEvents, Event } from "@/helpers/api-util";
 import EventList from "@/components/events/EventList";
 import ResultsTitle from "@/components/events/results-title";
@@ -85,6 +86,13 @@ function FilteredEventsPage(props: Props): JSX.Element {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        <Head>
+          <title>Filtered Events</title>
+          <meta
+            name="description"
+            content={`All events for ${numMonth}/${numYear}`}
+          />
+        </Head>
         <ErrorAlert>
           <p>No events found for the chosen filter!</p>
         </ErrorAlert>

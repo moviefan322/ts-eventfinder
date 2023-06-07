@@ -24,13 +24,19 @@ function HomePage(props: Props): JSX.Element {
   }
 
   return (
-    <div>
+    <>
       <Head>
         <title>NextJS Events</title>
+        <meta
+        name="description"
+        content="Find a lot of great events that allow you to evolve..."
+        />
       </Head>
-      <EventSearch onSearch={findEventsHandler} />
-      <EventList events={featuredEvents} />
-    </div>
+      <div>
+        <EventSearch onSearch={findEventsHandler} />
+        <EventList events={featuredEvents} />
+      </div>
+    </>
   );
 }
 

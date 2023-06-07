@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import Head from "next/head";
 import { getEventById, getFeaturedEvents } from "@/helpers/api-util";
 import { Event } from "@/dummy-data";
 import EventSummary from "@/components/event-detail/event-summary";
@@ -16,13 +17,17 @@ function EventDetail(props: Props) {
   if (!event) {
     return (
       <div className="center">
-          <h1>Loading..</h1>
+        <h1>Loading..</h1>
       </div>
     );
   }
 
   return (
     <Fragment>
+      <Head>
+        <title>{event.title}</title>
+        <meta name="description" content={event.description} />
+      </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}
@@ -51,9 +56,11 @@ export async function getStaticProps(context: any) {
 
 export async function getStaticPaths() {
   const events: Event[] = await getFeaturedEvents();
-  const paths: { params: { eventId: string } }[] = events.map((event: Event) => ({
-    params: { eventId: event.id },
-  }));
+  const paths: { params: { eventId: string } }[] = events.map(
+    (event: Event) => ({
+      params: { eventId: event.id },
+    })
+  );
 
   return {
     paths,

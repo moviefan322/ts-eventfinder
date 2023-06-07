@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { GetStaticProps } from "next";
 import { getAllEvents, Event } from "@/helpers/api-util";
 import EventList from "@/components/events/EventList";
@@ -19,10 +20,19 @@ function EventsPage(props: Props): JSX.Element {
   }
 
   return (
-    <div>
-      <EventSearch onSearch={findEventsHandler} />
-      <EventList events={allEvents} />
-    </div>
+    <>
+      <Head>
+        <title>All Events</title>
+        <meta
+          name="description"
+          content="Find a lot of great events that allow you to evolve..."
+        />
+      </Head>
+      <div>
+        <EventSearch onSearch={findEventsHandler} />
+        <EventList events={allEvents} />
+      </div>
+    </>
   );
 }
 
