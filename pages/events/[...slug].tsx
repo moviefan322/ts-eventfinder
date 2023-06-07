@@ -42,8 +42,20 @@ function FilteredEventsPage(props: Props): JSX.Element {
     }
   }, [data]);
 
+  let pageHeadData: JSX.Element = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name="description" content="A list of filtered events." />
+    </Head>
+  );
+
   if (!filteredData) {
-    return <p className="center">Loading...</p>;
+    return (
+      <>
+        {pageHeadData}
+        <p className="center">Loading...</p>
+      </>
+    );
   }
 
   const filteredYear: string = filteredData[0];
@@ -51,6 +63,16 @@ function FilteredEventsPage(props: Props): JSX.Element {
 
   const numYear: number = +filteredYear;
   const numMonth: number = +filteredMonth;
+
+  pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${numMonth}/${numYear}`}
+      />
+    </Head>
+  );
 
   const fileteredEvents = loadedEvents.filter((event: Event) => {
     const eventDate: Date = new Date(event.date);
@@ -71,6 +93,7 @@ function FilteredEventsPage(props: Props): JSX.Element {
   ) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid filter. Please adjust your values!</p>
         </ErrorAlert>
@@ -86,13 +109,7 @@ function FilteredEventsPage(props: Props): JSX.Element {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
-        <Head>
-          <title>Filtered Events</title>
-          <meta
-            name="description"
-            content={`All events for ${numMonth}/${numYear}`}
-          />
-        </Head>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found for the chosen filter!</p>
         </ErrorAlert>
@@ -104,10 +121,13 @@ function FilteredEventsPage(props: Props): JSX.Element {
   }
 
   return (
-    <div>
-      <ResultsTitle date={new Date(numYear, numMonth - 1)} />
-      <EventList events={filteredEvents} />
-    </div>
+    <>
+      {pageHeadData}
+      <div>
+        <ResultsTitle date={new Date(numYear, numMonth - 1)} />
+        <EventList events={filteredEvents} />
+      </div>
+    </>
   );
 }
 
