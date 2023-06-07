@@ -42,9 +42,22 @@ export async function getAllEvents(): Promise<Event[]> {
   return events;
 }
 
-export async function getFilteredEvents() {}
+export async function getFilteredEvents(dateFilter: {
+  year: number;
+  month: number;
+}) {
+  const { year, month } = dateFilter;
+  const allEvents: Event[] = await getAllEvents();
+  let filteredEvents: Event[] = allEvents.filter((event: Event) => {
+    const eventDate: Date = new Date(event.date);
+    return (
+      eventDate.getFullYear() === year && eventDate.getMonth() === month - 1
+    );
+  });
+  return filteredEvents;
+}
 
 export async function getEventById(id: string) {
-    const allEvents: Event[] = await getAllEvents();
-    return allEvents.find((event: Event) => event.id === id);
+  const allEvents: Event[] = await getAllEvents();
+  return allEvents.find((event: Event) => event.id === id);
 }
