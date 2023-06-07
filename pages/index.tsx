@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import { GetStaticProps } from "next";
 import { useRouter, NextRouter } from "next/router";
 import { getFeaturedEvents, Event } from "@/helpers/api-util";
@@ -24,6 +25,9 @@ function HomePage(props: Props): JSX.Element {
 
   return (
     <div>
+      <Head>
+        <title>NextJS Events</title>
+      </Head>
       <EventSearch onSearch={findEventsHandler} />
       <EventList events={featuredEvents} />
     </div>
