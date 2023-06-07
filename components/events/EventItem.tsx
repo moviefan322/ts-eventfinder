@@ -26,8 +26,8 @@ function EventItem({ event }: EventItemProps): JSX.Element {
       <Image
         src={"/" + event.image}
         alt={event.title}
-        width={400}
-        height={300}
+        width={250}
+        height={160}
       />
       <div className={classes.content}>
         <div className={classes.summary}>
