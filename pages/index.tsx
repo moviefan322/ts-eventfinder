@@ -1,4 +1,5 @@
 import React from "react";
+import { GetStaticProps } from "next";
 import { useRouter, NextRouter } from "next/router";
 import { getFeaturedEvents, Event } from "@/helpers/api-util";
 import EventList from "../components/events/EventList";
@@ -29,7 +30,7 @@ function HomePage(props: Props): JSX.Element {
   );
 }
 
-export async function getStaticProps(): Promise<{ props: Props }> {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   const featuredEvents: Event[] = await getFeaturedEvents();
   console.log(featuredEvents);
 
@@ -37,7 +38,8 @@ export async function getStaticProps(): Promise<{ props: Props }> {
     props: {
       featuredEvents,
     },
+    revalidate: 1800,
   };
-}
+};
 
 export default HomePage;
