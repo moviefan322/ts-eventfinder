@@ -44,4 +44,7 @@ export async function getAllEvents(): Promise<Event[]> {
 
 export async function getFilteredEvents() {}
 
-export async function getEventById(id: string) {}
+export async function getEventById(id: string) {
+    const allEvents: Event[] = await getAllEvents();
+    return allEvents.find((event: Event) => event.id === id);
+}
