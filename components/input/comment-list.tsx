@@ -1,10 +1,12 @@
 import classes from "./comment-list.module.css";
+import { ObjectId } from "mongodb";
 
 type CommentListProps = {
   items: {
     text: string;
     name: string;
-    id: string;
+    _id: ObjectId;
+    eventId: string;
   }[];
 };
 
@@ -12,7 +14,7 @@ function CommentList({ items }: CommentListProps) {
   return (
     <ul className={classes.comments}>
       {items.map((item) => (
-        <li key={item.id}>
+        <li key={item._id.toString()}>
           <p>{item.text}</p>
           <div>
             By <address>{item.name}</address>
