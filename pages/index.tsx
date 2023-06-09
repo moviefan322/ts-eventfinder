@@ -5,6 +5,7 @@ import { useRouter, NextRouter } from "next/router";
 import { getFeaturedEvents, Event } from "@/helpers/api-util";
 import EventList from "../components/events/EventList";
 import EventSearch from "@/components/events/EventSearch";
+import NewsletterRegistration from "@/components/input/newsletter-registration";
 
 type Props = {
   featuredEvents: Event[];
@@ -38,6 +39,7 @@ function HomePage(props: Props): JSX.Element {
       </Head>
       <div>
         <EventSearch onSearch={findEventsHandler} />
+        <NewsletterRegistration />
         <EventList events={featuredEvents} />
       </div>
     </>
