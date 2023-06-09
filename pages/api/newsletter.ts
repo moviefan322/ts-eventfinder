@@ -16,6 +16,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     )) as MongoClient;
     const db = client.db();
     await db.collection("emails").insertOne({ email: email });
+    console.log("Connected");
+    console.log(process.env.MONGO_URI);
 
     client.close();
 
