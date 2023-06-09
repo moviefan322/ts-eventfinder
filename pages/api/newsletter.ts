@@ -1,18 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { MongoClient } from "mongodb";
+import { connectDatabase, insertDocument } from "../../helpers/db-util";
 import "dotenv/config";
-
-async function connectDatabase() {
-  const client = (await MongoClient.connect(
-    process.env.MONGO_URI
-  )) as MongoClient;
-  return client;
-}
-
-async function insertDocument(client: MongoClient, document: any) {
-  const db = client.db();
-  return db.collection("emails").insertOne(document);
-}
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
@@ -33,7 +22,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     }
 
     try {
-      await insertDocument(client, { email: email });
+      await insertDocument(client, "emails", { email: email });
       client.close();
     } catch (error) {
       res.status(500).json({ message: "Inserting data failed!" });
