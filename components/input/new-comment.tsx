@@ -1,16 +1,23 @@
 import { useRef, useState } from "react";
 import classes from "./new-comment.module.css";
+import { useRouter } from "next/router";
+import { ObjectId } from "mongodb";
+
+type Comment = {
+  text: string;
+  name: string;
+  email: string;
+  eventId: string;
+  _id?: ObjectId;
+};
 
 type NewCommentProps = {
-  onAddComment: (commentData: {
-    email: string;
-    name: string;
-    text: string;
-  }) => void;
+  onAddComment: (commentData: Comment) => void;
 };
 
 function NewComment(props: NewCommentProps) {
   const [isInvalid, setIsInvalid] = useState(false);
+  const router = useRouter();
 
   const emailInputRef = useRef<HTMLInputElement | null>(null);
   const nameInputRef = useRef<HTMLInputElement | null>(null);
@@ -40,9 +47,12 @@ function NewComment(props: NewCommentProps) {
       email: enteredEmail,
       name: enteredName,
       text: enteredComment,
+      eventId: router.query.eventId as string,
     });
 
-    
+    emailInputRef.current!.value = "";
+    nameInputRef.current!.value = "";
+    commentInputRef.current!.value = "";
   }
 
   return (
