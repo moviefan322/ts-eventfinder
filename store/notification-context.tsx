@@ -18,7 +18,7 @@ type NotificationContextProviderProps = {
 
 export const NotificationContext = createContext<NotificationContextType>({
   notification: null,
-  showNotification: () => {},
+  showNotification: (notificationData) => {},
   hideNotification: () => {},
 });
 
@@ -27,22 +27,22 @@ export function NotificationContextProvider(
 ) {
   const [notification, setNotification] = useState<Notification | null>(null);
 
-  const showNotification = (notificationData: Notification) => {
+  const showNotificationHandler = (notificationData: Notification) => {
     setNotification(notificationData);
   };
 
-  const hideNotification = () => {
+  const hideNotificationHandler = () => {
     setNotification(null);
   };
 
-  const contextValue: NotificationContextType = {
-    notification,
-    showNotification,
-    hideNotification,
+  const context: NotificationContextType = {
+    notification: notification,
+    showNotification: showNotificationHandler,
+    hideNotification: hideNotificationHandler,
   };
 
   return (
-    <NotificationContext.Provider value={contextValue}>
+    <NotificationContext.Provider value={context}>
       {props.children}
     </NotificationContext.Provider>
   );
