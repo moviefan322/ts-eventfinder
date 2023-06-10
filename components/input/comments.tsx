@@ -21,10 +21,12 @@ type Comment = {
 function Comments({ eventId }: CommentsProps) {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
+  const [isFetchingComments, setIsFetchingComments] = useState(false);
   const notificationCtx = useContext(NotificationContext);
 
   useEffect(() => {
     if (showComments) {
+      setIsFetchingComments(true);
       fetch(`/api/comments/${eventId}`)
         .then((response) => response.json())
         .then((data) => {
@@ -32,6 +34,7 @@ function Comments({ eventId }: CommentsProps) {
             (comment: Comment) => comment.eventId === eventId
           );
           setComments(relevantComments);
+          setIsFetchingComments(false);
         });
     }
   }, [showComments, eventId]);
@@ -78,6 +81,14 @@ function Comments({ eventId }: CommentsProps) {
           status: "error",
         });
       });
+  }
+
+  if (isFetchingComments) {
+    return (
+      <section className={classes.comments}>
+        <p>Loading...</p>
+      </section>
+    );
   }
 
   return (
